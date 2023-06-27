@@ -26,9 +26,8 @@ namespace Holo
             {
                 options.AddPolicy("CorsPolicy", builder =>
                 {
-                    var origins = Configuration.GetValue<string>("CorsOrigins").Split(";");
                     builder
-                        .WithOrigins(origins)
+                        .AllowAnyOrigin() // Permite todas as origens
                         .AllowAnyMethod()
                         .AllowAnyHeader()
                         .SetIsOriginAllowed((host) => true);
