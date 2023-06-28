@@ -47,5 +47,19 @@ namespace Holo.Controllers
 
             return holograma;
         }
+
+        [HttpGet]
+        [Route("por-categoria/{categoriaId}")]
+        public ActionResult<List<Holograma>> GetHologramaPorCategoria(int categoriaId)
+        {
+            var hologramas = _context.Hologramas.Where(x => x.CategoriaId == categoriaId).ToList();
+
+            if (hologramas == null)
+            {
+                return NotFound();
+            }
+
+            return hologramas;
+        }
     }
 }

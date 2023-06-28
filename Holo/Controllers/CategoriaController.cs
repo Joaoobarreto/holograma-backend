@@ -19,10 +19,10 @@ namespace Holo.Controllers
 
         [HttpGet]
         [Route("")]
-        public ActionResult<List<TipoPagamento>> ListarHologramas()
+        public ActionResult<List<Categoria>> ListarCategorias()
         {
-            List<TipoPagamento> tipoPagamento = _context.TiposPagamento.ToList();
-            return tipoPagamento;
+            List<Categoria> categoria = _context.Categorias.ToList();
+            return categoria;
         }
     }
 }
