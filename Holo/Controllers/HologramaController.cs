@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using System.Linq;
+using Holo.Models.Holograma;
 
 namespace Holo.Controllers
 {
@@ -53,6 +54,22 @@ namespace Holo.Controllers
         public ActionResult<List<Holograma>> GetHologramaPorCategoria(int categoriaId)
         {
             var hologramas = _context.Hologramas.Where(x => x.CategoriaId == categoriaId).ToList();
+
+            if (hologramas == null)
+            {
+                return NotFound();
+            }
+
+            return hologramas;
+        }
+
+        [HttpPost]
+        [Route("por-descricao")]
+        public ActionResult<List<Holograma>> GetHologramaPorDescricao([FromBody] GetHologramaPorDescricao getHologramaPorDescricao)
+        {
+            var hologramas =  _context.Hologramas
+                                .Where(h => EF.Functions.Like(h.Descricao, "%" + getHologramaPorDescricao.Descricao + "%"))
+                                .ToList();
 
             if (hologramas == null)
             {
