@@ -70,9 +70,11 @@ namespace Holo.Controllers
             usuarioExistente.Cpf = atualizarUsuario.Cpf;
             usuarioExistente.Telefone = atualizarUsuario.Telefone;
 
+            Endereco endereco = null;
+
             if (atualizarUsuario.Endereco is not null)
             {
-                Endereco endereco = _context.Enderecos.FirstOrDefault(e => e.UsuarioId == atualizarUsuario.Id);
+                endereco = _context.Enderecos.FirstOrDefault(e => e.UsuarioId == atualizarUsuario.Id);
                 if (endereco is null)
                 {
                     _context.Enderecos.Add(atualizarUsuario.Endereco);
@@ -91,7 +93,7 @@ namespace Holo.Controllers
 
             _context.SaveChanges();
 
-            return Ok();
+            return Ok(endereco);
         }
 
         [HttpGet]
