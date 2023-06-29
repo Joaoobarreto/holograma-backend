@@ -35,7 +35,7 @@ namespace Holo.Controllers
                 return BadRequest("Pedido inválido");
             }
 
-            Pedido novoPedido = new Pedido(criarPedido.UsuarioId, DateTime.Now, criarPedido.TipoPagamentoId, criarPedido.CartaoId, "aguardando confirmação");
+            Pedido novoPedido = new Pedido(criarPedido.UsuarioId, DateTime.Now, criarPedido.TipoPagamentoId, criarPedido.CartaoId, "aguardando confirmação", criarPedido.EnderecoID);
 
             foreach (int hologramaId in criarPedido.Hologramas)
             {

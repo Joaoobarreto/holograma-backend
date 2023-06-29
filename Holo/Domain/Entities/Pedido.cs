@@ -18,13 +18,14 @@ namespace Holo.Domain.Entities
         public Endereco Endereco { get; set; }
 
         public Pedido() { }
-        public Pedido(int usuarioId, DateTime data, int tipoPagamentoId, int cartoId, string status)
+        public Pedido(int usuarioId, DateTime data, int tipoPagamentoId, int cartoId, string status, int enderecoId)
         {
             UsuarioId = usuarioId;
             Data = data;
             TipoPagamentoId = tipoPagamentoId;
             CartaoId = cartoId;
             Status = status;
+            EnderecoId = enderecoId;
         }
     }
 }

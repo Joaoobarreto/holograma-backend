@@ -8,5 +8,6 @@ namespace Holo.Models.Pedidos
         public int TipoPagamentoId { get; set; }
         public int CartaoId { get; set; }
         public List<int> Hologramas { get; set; }
+        public int EnderecoID { get; set; }
     }
 }
