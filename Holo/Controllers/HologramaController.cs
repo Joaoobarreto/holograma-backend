@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using System.Linq;
 using Holo.Models.Holograma;
+using Holo.Models.Cartao;
 
 namespace Holo.Controllers
 {
@@ -28,11 +29,50 @@ namespace Holo.Controllers
             return hologramas;
         }
 
-        [HttpGet]
-        [Route("atualizar")]
-        public ActionResult<List<Holograma>> UpdateHologramas()
+        [HttpPost]
+        [Route("criar")]
+        public ActionResult<Holograma> CriarHologramas([FromBody] CriarHolograma criarHolograma)
         {
-            return Ok();
+            if (criarHolograma is null)
+            {
+                return BadRequest("Holograma inválido");
+            }
+
+            var holograma = new Holograma()
+            {
+                Descricao = criarHolograma.Descricao,
+                Valor = criarHolograma.valor,
+                CategoriaId = criarHolograma.CategoriaId,
+                Quantidade = criarHolograma.Quantidade,
+                Ativo = true
+            };
+
+            _context.Hologramas.Add(holograma);
+            _context.SaveChanges();
+
+            return Ok(holograma);
+        }
+
+        [HttpPost]
+        [Route("atualizar")]
+        public ActionResult<Holograma> UpdateHologramas([FromBody] AtualizarHolograma atualizarHolograma)
+        {
+            var hologramaExistente = _context.Hologramas.Find(atualizarHolograma.Id);
+
+            if (hologramaExistente is null)
+            {
+                return NotFound();
+            }
+
+            hologramaExistente.Descricao = atualizarHolograma.Descricao;
+            hologramaExistente.Valor = atualizarHolograma.Valor;
+            hologramaExistente.CategoriaId = atualizarHolograma.CategoriaId;
+            hologramaExistente.Ativo = atualizarHolograma.Ativo;
+            hologramaExistente.Quantidade = atualizarHolograma.Quantidade;
+
+            _context.SaveChanges();
+
+            return Ok(hologramaExistente);
         }
 
         [HttpGet]
