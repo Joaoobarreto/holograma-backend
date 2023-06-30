@@ -195,6 +195,10 @@ namespace Holo.Domain.config
                 entity.Property(e => e.Telefone)
                     .HasColumnName("telefone")
                     .IsRequired();
+
+                entity.Property(e => e.Token)
+                    .HasColumnName("token")
+                    .IsRequired();
             });
 
             modelBuilder.Entity<Endereco>(entity =>

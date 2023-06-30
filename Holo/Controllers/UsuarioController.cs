@@ -41,6 +41,7 @@ namespace Holo.Controllers
                 Email = criarUsuario.Email,
                 Cpf = criarUsuario.Cpf,
                 Telefone = criarUsuario.Telefone,
+                Token = criarUsuario.Token,
             };
 
             _context.Usuarios.Add(novoUsuario);
@@ -114,6 +115,31 @@ namespace Holo.Controllers
                 Nome = usuario.Nome,
                 Email = usuario.Email,
                 Telefone = usuario.Telefone,
+                Token = usuario.Token,
+                Endereco = endereco,
+            };
+
+            return Ok(response);
+        }
+
+        [HttpGet]
+        [Route("por-token/{token}")]
+        public ActionResult<UsuarioResponse> GetUsuarioPorToken(string token)
+        {
+            Usuario usuario = _context.Usuarios.FirstOrDefault(u => u.Token == token);
+            if (usuario is null)
+            {
+                return Ok(null);
+            }
+            Endereco endereco = _context.Enderecos.FirstOrDefault(e => e.UsuarioId == usuario.Id);
+
+            UsuarioResponse response = new UsuarioResponse()
+            {
+                Cpf = usuario.Cpf,
+                Nome = usuario.Nome,
+                Email = usuario.Email,
+                Telefone = usuario.Telefone,
+                Token = usuario.Token,
                 Endereco = endereco,
             };
 

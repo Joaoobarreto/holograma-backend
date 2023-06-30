@@ -10,5 +10,6 @@ namespace Holo.Models.Usuario
         public string Cpf { get; set; }
         public string Telefone { get; set; }
         public Endereco Endereco { get; set; }
+        public string Token { get; set; }
     }
 }
