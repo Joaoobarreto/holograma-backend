@@ -111,6 +111,7 @@ namespace Holo.Controllers
 
             UsuarioResponse response = new UsuarioResponse()
             {
+                Id = usuario.Id,
                 Cpf = usuario.Cpf,
                 Nome = usuario.Nome,
                 Email = usuario.Email,
@@ -135,6 +136,7 @@ namespace Holo.Controllers
 
             UsuarioResponse response = new UsuarioResponse()
             {
+                Id = usuario.Id,
                 Cpf = usuario.Cpf,
                 Nome = usuario.Nome,
                 Email = usuario.Email,
