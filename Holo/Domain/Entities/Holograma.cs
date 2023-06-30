@@ -6,7 +6,7 @@ namespace Holo.Domain.Entities
     {
         public int Id { get; set; }
         public string Descricao { get; set; }
-        public double Valor { get; set; }
+        public decimal Valor { get; set; }
         public int CategoriaId { get; set; }
         public bool Ativo { get; set; }
         public string ArquivoId { get; set; }
