@@ -36,20 +36,21 @@ namespace Holo.Controllers
             }
 
             Pedido novoPedido = new Pedido(criarPedido.UsuarioId, DateTime.Now, criarPedido.TipoPagamentoId, criarPedido.CartaoId, "aguardando confirmação", criarPedido.EnderecoID);
+            _context.Pedidos.Add(novoPedido);
+            _context.SaveChanges(); // Salvar o novo pedido para gerar o ID
 
             foreach (int hologramaId in criarPedido.Hologramas)
             {
                 PedidoHolograma pedidoHolograma = new PedidoHolograma
                 {
-                    PedidoId = novoPedido.Id,
+                    PedidoId = novoPedido.Id, // Agora o novoPedido possui um ID válido
                     HologramaId = hologramaId
                 };
 
                 _context.PedidosHologramas.Add(pedidoHolograma);
             }
 
-            _context.Pedidos.Add(novoPedido);
-            _context.SaveChanges();
+            _context.SaveChanges(); // Salvar os pedidos hologramas
 
             return Ok(novoPedido);
         }
